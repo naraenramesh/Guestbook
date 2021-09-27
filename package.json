@@ -1,16 +1,12 @@
 {
   "name": "guestbook",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./app.js",
+    "start-server": "nodemon app.js",
     "start": "node app.js"
   },
-  "author": "Naraen",
-  "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.943.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
@@ -26,11 +22,19 @@
     "mongoose-better-id": "^2.1.1",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "nodemailer": "^6.6.2",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.7"
   },
-  "engines": {
-    "node": "15.x"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naraenramesh/Guestbook.git"
+  },
+  "author": "Naraen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naraenramesh/Guestbook/issues"
+  },
+  "homepage": "https://github.com/naraenramesh/Guestbook#readme"
 }

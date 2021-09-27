@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const express=require('express');
 const mongoose=require('mongoose');
 const bodyParser= require('body-parser');
@@ -11,6 +11,7 @@ const EntryRouter=require('./models/routes/entryRoute');
 const dateFormat = require('dateformat');
 
 const config=require('./config/covict_config')
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
 
@@ -18,8 +19,8 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 app.use("/",express.static(path.join(__dirname,"angular")));
 
-app.use(express.static('public'));   
-
+app.use(express.static('public'));
+Entry.find().then(rs=>console.log(rs))
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
   });
-  
+
 
 app.use("/api",UserRouter);
 app.use("/api",EntryRouter);
@@ -38,18 +39,18 @@ app.use((req,res,next)=>{
 })
 
 
-//const DB_URI=config.get('db.host')
-
-const DB_URI=process.env.DB_URI
-
-mongoose.connect("mongodb://" + DB_URI,
+Entry.deleteOne({title:'Js'}).then(er=>{
+  console.log("done");
+  User.find().then((ki)=>console.log(ki))
+}).catch(err=>console.log(err))
+mongoose.connect("mongodb+srv://guestbook:4ePDASE8TwWFDm3M@guestbook.nxb5s.mongodb.net/guestbook_test?retryWrites=true&w=majority",
 {useNewUrlParser: true, useUnifiedTopology : true})
 .then(()=>{
     console.log("Connected to Database");
     app.listen(config.get('port'))
 
 console.log("Running in " + config.get('env') + " mode at port " +config.get('port'));
-   
+
 }).catch((err)=>
 {console.log(err)}
 )

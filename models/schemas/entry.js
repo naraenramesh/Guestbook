@@ -11,7 +11,7 @@ entryId:{type:String,required:true,unique:true},
     creator:{type:Schema.Types.ObjectId, ref:'UserModel'}
 })
 
-var connection = mongoose.createConnection("mongodb://127.0.0.1:27017",
+var connection = mongoose.createConnection("mongodb+srv://guestbook:4ePDASE8TwWFDm3M@guestbook.nxb5s.mongodb.net/guestbook?retryWrites=true&w=majority",
 {useNewUrlParser: true, useUnifiedTopology : true});
 entrySchema.plugin(mongooseUniqueValidator);
 entrySchema.plugin(betterId,{

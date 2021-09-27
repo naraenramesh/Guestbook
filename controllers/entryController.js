@@ -2,6 +2,22 @@ const Entry=require('../models/schemas/entry')
 const {validationResult} = require('express-validator/check');
 const path=require('path')
 const fs=require('fs')
+const aws = require('aws-sdk');
+
+  aws.config.update({
+
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+
+    region: process.env.AWS_REGION
+
+  });
+
+  
+
+  const s3 = new aws.S3();
+
 exports.getUserEntries=async(req,res,next)=>{
     const currentPage = req.params.pageNumber || 1;
     const perPage = 2;
@@ -104,7 +120,7 @@ const result= await entry.save();
 const entry_out= await Entry.findOne({title:req.body.title}).populate('creator')
 
 if(!result.errors)
-{
+{console.log(entry_out)
         res.status(200).json({message:"Entry created",entry:entry_out})
 
 }
@@ -171,6 +187,7 @@ exports.deleteEntry=async(req,res,next)=>{
    
     try{
         
+     
           expressErrorCheck(req);
 
         const entry=await Entry.findOne({entryId:req.body.entryId})
@@ -184,10 +201,25 @@ exports.deleteEntry=async(req,res,next)=>{
     
     if(!result.errors)
     {
-        clearImage(entry.picture);
+        entry.picture="images/entryPictures/2021071244503-Koala.jpg"
+        //clearImage(entry.picture);
+        const params={
+            Bucket:'guestentrybook',
+            Key:entry.picture
+        }
+        s3.deleteObject(params, (error,data)=>{
+            if(error)
+            {
+                res.status(500).send(error)
+            }
+           // res.status(200).send("s3 gone")
+           if(data)
+           {console.log(data)
+           res.status(200).json({message:"Entry deleted" ,entryId:req.body.entryId})
+           }
+        })
 
-            res.status(200).json({message:"Entry deleted" ,entryId:req.body.entryId})
-    
+            
     }
         }
     catch(err)
