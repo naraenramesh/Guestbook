@@ -1,0 +1,41 @@
+
+
+<mat-dialog-content>
+  
+<h1 mat-dialog-title *ngIf="edit_trigger"> Edit the existing entry:</h1>
+<h1 mat-dialog-title *ngIf="!edit_trigger"> Add a new entry:</h1>
+  <form class="example-form" [formGroup]="entryForm" (ngSubmit)="OnSubmit()">
+  
+    
+      <mat-form-field class="example-full-width">
+        <mat-label >Entry Title</mat-label>
+        <input [maxlength]="30" id="entry_title" formControlName="title" matInput>
+      </mat-form-field>
+     <mat-form-field class="example-full-width">
+        <mat-label>Entry Description</mat-label>
+        <textarea [maxlength]="220" id="entry_desc" formControlName="description" matInput></textarea>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width">
+        <mat-label>Entry Picture(Upload a picture)</mat-label>
+        <div *ngIf="data && !imagePreview" >
+        <img mat-card-image [src]="host + data.picture" [alt]="data.title">
+    </div>
+    <div *ngIf="entryForm.get('picture').valid && imagePreview !== '' && imagePreview" >
+      <img mat-card-image [src]="imagePreview">
+  </div>
+      <ngx-mat-file-input  formControlName="picture" (change)="OnFileselect($event)"></ngx-mat-file-input> 
+  
+    </mat-form-field>
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button *ngIf="!edit_trigger" [mat-dialog-close]="true" 
+     type="submit" [disabled]="!entryForm.valid">Add</button>
+     <button mat-button *ngIf="edit_trigger" [mat-dialog-close]="true" 
+     type="submit" [disabled]="!entryForm.valid">Update</button>
+  </mat-dialog-actions>
+
+</form>
+
+</mat-dialog-content>

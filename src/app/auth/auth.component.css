@@ -1,0 +1,86 @@
+
+  .login-box{
+    margin: 15% 15% 25% 8%;
+    font-family: Helvetica, sans-serif;
+    position: fixed;
+}
+
+.example-card {
+    width:17rem;
+    background:#12232e;
+    color:white;
+    font-weight: bolder;
+    padding:0.932rem;
+  
+  }
+
+  mat-label{
+  
+    color:white;
+    font-size:medium;
+  }
+  .mat-form-field{
+    width:100%
+  }
+  .mat-button{
+    background:white;
+    color:#12232e;
+    padding:0.125rem;
+    margin:0.3125rem;
+  }
+a{
+  display: inline-block;
+  text-decoration: underline;
+  padding:1.25rem;
+  cursor: pointer;
+  color:white;
+  font-size:medium;  
+  font-weight: lighter;
+}
+
+img{
+  width:50%;
+  height:50%;
+ margin:3.125rem 3.125rem 0 3.125rem;
+}
+
+ .mat-card-image{
+width:50%;
+align-items: center;
+background-size: cover;
+height:50%
+  }  
+   .example-header-image {
+    background-image: url('../pictures/login-lock.png');
+        background-position: center;
+    background-size: cover;
+ 
+    padding:0.3125rem;
+  }
+  
+  
+  @media(min-width:30rem)
+  {
+    .login-box{
+      margin: 15% 15% 25% 15%;
+  
+  }
+  
+  .example-card {
+      width:20rem;
+    }
+}
+
+
+  
+  @media(min-width:45rem)
+  {
+    .login-box{
+      margin: 5% 15% 25% 35%;
+  
+  }
+  
+  .example-card {
+      width:26rem;
+    }
+}

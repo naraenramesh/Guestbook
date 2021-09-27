@@ -1,0 +1,103 @@
+.container{
+    overflow: hidden;
+}
+.verticalheader{
+    visibility: hidden;
+}
+mat-toolbar{
+    background-color:#12232e;
+    color:white
+  }
+  
+  mat-expansion-panel{
+    background-color:#12232e;
+    color:white
+  }
+  mat-sidenav-container{
+    height:90.2vh;
+      width:100%;
+      background-color:rgb(114, 211, 192);
+  }
+.content{
+    
+    height:100%
+}
+
+mat-nav-list{
+  width:90%;
+}
+
+ngx-avatar{
+  display:inline-block
+}
+  .mat-menu-content:not(:empty){
+  
+      background-color:#12232e !important;
+  
+  }
+  .mmbtnlogout{
+    color:white
+  }
+  .mmbtn{
+    background:white;
+    color:#12232e;
+  }
+  mat-panel-title{
+    color:white
+  }
+  
+  mat-label{
+    color:white
+  }
+  .profilepic{
+    background-size:cover;
+    background-repeat:no-repeat;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+  }
+  
+  a{
+    margin:0.625rem;
+  }
+  
+  a:hover
+    {
+      color:rgb(5, 160, 129)!important;
+  border-bottom: 0.1875 solid white;
+  
+    }
+  
+    .active {
+      color:rgb(5, 160, 129)!important;
+  font-weight: bold;
+    }
+  
+  h4{
+    padding: 0.5rem;
+    display: inline-block;
+    font-size: medium;
+  }
+  
+  .userbutton{
+    position: absolute;
+    right: 0rem;
+    margin: 0;
+  }
+  
+  .mat-sidenav{
+background-color:#12232e;
+
+  }
+
+  .mat-list-item{
+    color:white
+  }
+
+  @media(min-width:43rem)
+  {
+      
+.verticalheader{
+    visibility:visible;
+}
+  }

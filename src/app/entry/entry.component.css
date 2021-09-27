@@ -1,0 +1,15 @@
+.mat-button{
+    margin:1.25rem;
+}
+mat-label{
+    color:#12232e;
+}
+
+mat-icon{
+    display: inline-block;
+}
+
+.mat-mini-fab
+{
+    color:rgb(5, 160, 129)
+}

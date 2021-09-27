@@ -1,0 +1,62 @@
+
+<div *ngFor="let entry of entries_list;let i=index">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+<!--        <div mat-card-avatar class="example-header-image"></div>-->  
+          <mat-card-title>{{entry.title}}
+
+          </mat-card-title>
+          <div class="maticon" style="float:right">
+            <mat-icon *ngIf="entry.approved"
+            mat-raised-button #tooltip="matTooltip"
+          matTooltip="Approved"
+          matTooltipHideDelay="500"
+          >verified_user</mat-icon>
+          
+          </div>
+
+          <div class="mat_icon">
+            <mat-icon  mat-raised-button #tooltip="matTooltip"
+            matTooltip="Click to edit Entry"
+            matTooltipHideDelay="500" (click)="OnEdit(i)">edit</mat-icon>
+            
+            <mat-icon  mat-raised-button #tooltip="matTooltip"
+            matTooltip="Click to approve Entry"
+            matTooltipHideDelay="500" (click)="OnApprove(i)">done_outline</mat-icon>
+            <mat-icon   mat-raised-button #tooltip="matTooltip"
+            matTooltip="Click to delete Entry"
+            matTooltipHideDelay="500" (click)="OnDelete(i)">delete</mat-icon>
+   
+          </div>
+        </mat-card-header>
+      
+        <mat-grid-list cols="4">
+          <mat-grid-tile [colspan]="1">
+            <img mat-card-image [src]="url + entry.picture" [alt]="entry.title">
+
+          </mat-grid-tile>
+          <mat-grid-tile style="overflow:auto" [colspan]="3">
+             {{entry.description}}
+      
+          </mat-grid-tile>
+          <div *ngIf="all_trigger" class="creator">posted by {{entry.creator.username}}</div>
+        </mat-grid-list>
+       
+       
+      
+      
+      <mat-card-actions>
+ 
+ 
+        
+        </mat-card-actions>
+      </mat-card>
+
+</div>
+
+
+<mat-paginator *ngIf="paginator_need"
+ [length]="length" [pageSize]="pageSize"
+ (page)="onPageChanged()">
+</mat-paginator>

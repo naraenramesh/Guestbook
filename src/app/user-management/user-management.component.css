@@ -1,0 +1,38 @@
+.example-card{
+    background-color:#12232e;
+    color:white;
+    font-weight: bolder;
+    width:12.5rem;
+    padding:0.932rem;
+    margin: 15% 15% 25% 15%;
+    position: fixed;
+}
+
+mat-form-field{
+  
+    color:white;
+}
+
+mat-label{
+  
+    color:white;
+    font-size:medium;
+  }
+
+ .mat-select-value{
+  
+    color:white !important;
+    font-size:medium;
+  }
+
+  .not-empty-select.mat-selected {
+    color: white !important;
+  }
+
+  @media(min-width:42rem)
+  {
+    .example-card{
+
+    margin: 5% 15% 25% 35%;
+  }
+}

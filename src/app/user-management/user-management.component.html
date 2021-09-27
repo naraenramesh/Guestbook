@@ -1,0 +1,54 @@
+<mat-card class="example-card">
+    <mat-card-header>
+
+      <mat-card-title>Update User Role</mat-card-title>
+
+    </mat-card-header>
+
+    <div *ngIf="isLoading" style="text-align: center;">
+
+    </div>
+    <form #UpdateForm="ngForm" *ngIf="!isLoading">
+      <div class="form-group">
+
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="text"
+               
+            aria-label="Number"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"/>
+            <mat-autocomplete
+            (optionSelected)="Onselectuser($event)" autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+          *ngFor="let username of filteredOptions| async" [value]="username"
+          >
+                {{username}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+   
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>Choose privilege</mat-label>
+            <mat-select ngModel name="privilege" id="privilege" required>
+              <mat-option value="Guest">Guest</mat-option>
+              <mat-option value="Admin">Admin</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>      
+      <div>
+        <button mat-button
+            (click)="OnUpdateUser()"
+          [disabled]="!UpdateForm.valid">
+               Update User
+        </button>
+        
+           </div>
+    </form>
+    </mat-card>
+
+ 

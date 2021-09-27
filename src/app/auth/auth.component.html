@@ -1,0 +1,61 @@
+
+<div class="login-box">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title *ngIf="signuptrigger">Join us</mat-card-title>
+          <mat-card-title *ngIf="!signuptrigger">Get Started</mat-card-title>
+        </mat-card-header>
+    
+        <div *ngIf="isLoading" style="text-align: center;">
+        
+        </div>
+
+        <form class="example-form" [formGroup]="authForm" (ngSubmit)="OnSubmit()">
+  
+    
+          <mat-form-field class="example-full-width" *ngIf="signuptrigger">
+            <mat-label >Username</mat-label>
+            <input id="username" formControlName="username" matInput>
+          </mat-form-field>
+        
+         <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input id="email" formControlName="email" matInput>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput
+                  id="password"
+                  formControlName="password"
+                  required
+                  minlength="6"
+              [type]="hide ? 'text' : 'password'"
+                />
+        <a mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </a>
+          </mat-form-field>
+    
+          <mat-form-field class="example-full-width"*ngIf="signuptrigger">
+            <mat-label>Entry Picture(Upload a picture)</mat-label>
+        
+            <div *ngIf="imagePreview !== '' && imagePreview" >
+          <img mat-card-image [src]="imagePreview">
+      </div>
+          <ngx-mat-file-input  formControlName="profile_picture" (change)="OnFileselect($event)"></ngx-mat-file-input> 
+      
+        </mat-form-field>
+        <button mat-button *ngIf="signuptrigger"
+         type="submit" [disabled]="!authForm.valid">Signup</button>
+       
+          <button mat-button *ngIf="!signuptrigger" id="submit"
+         type="submit" [disabled]="!authForm.valid">Login</button>
+       
+       <a *ngIf="!signuptrigger" (click)="triggerSignup()">Click here to signup</a>
+  
+    </form>
+        </mat-card>
+    </div>
+    
+    

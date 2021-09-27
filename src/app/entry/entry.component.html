@@ -1,0 +1,28 @@
+
+  <mat-form-field>
+    <mat-label *ngIf="!all_trigger">Search your entries</mat-label>
+    <mat-label *ngIf="all_trigger">Search all entries</mat-label>
+    <input type="text"
+       
+    aria-label="Number"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"/>
+    <mat-autocomplete
+    (optionSelected)="Onselectentry($event)" autoActiveFirstOption #auto="matAutocomplete">
+  <mat-option
+  *ngFor="let entry of filteredOptions| async" [value]="entry"
+  >
+        {{entry}}
+      </mat-option>
+    </mat-autocomplete>
+    
+  </mat-form-field>
+  <button *ngIf="reset" mat-button>
+  <mat-icon (click)="OnReset()">backspace</mat-icon>
+</button>
+  <button mat-button mat-mini-fab (click)="OnAddEntry()">
+    <mat-icon #tooltip="matTooltip"
+    matTooltip="Click to add Entry">add</mat-icon>
+  </button>
+    <app-entry-list></app-entry-list>

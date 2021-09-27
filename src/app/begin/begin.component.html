@@ -1,0 +1,96 @@
+
+<div class="container">
+
+<mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>Guestbook</h1>
+      <span class="menu-spacer"></span>
+      <div class="verticalheader">
+      <a mat-button routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}" routerLink='/entry'>MyEntries</a>
+      <a mat-button *ngIf="admin_trigger && isAuthenticated" [routerLinkActiveOptions]="{exact:
+        true}" routerLinkActive="active" routerLink='/entry/all'>AllEntries</a>
+        <a mat-button *ngIf="admin_trigger && isAuthenticated" [routerLinkActiveOptions]="{exact:
+          true}" routerLinkActive="active" routerLink='/user-management'> User Management </a>
+        
+  
+      </div>
+  
+	   <button class="userbutton" *ngIf="isAuthenticated" mat-button [matMenuTriggerFor]="menu">
+
+<ngx-avatar class="avatar" [src]='profile_picture'></ngx-avatar>
+            <h4>{{uname}}</h4>
+         
+          </button>
+     
+            <mat-menu #menu="matMenu">
+          <mat-accordion (click)="MakeStatic($event)" class="example-headers-align">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Change Password
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+          <form #updForm="ngForm" (ngSubmit)="onSubmit(updForm)">
+<div class="form-group">
+              <mat-form-field>
+                <mat-label>Enter new Password</mat-label>
+                <input matInput name="password" ngModel id="password" >
+              </mat-form-field>
+            </div>
+                <button class="mmbtn" mat-button type="submit">Submit</button>
+            </form>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Change Profile Picture
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+          <form [formGroup]="picForm" (ngSubmit)="OnSubmitPicture()">
+<div class="form-group">
+              <mat-form-field>
+                <mat-label>Upload new profile Picture</mat-label>
+                <div *ngIf="picForm.get('picture').valid && imagePreview !== '' && imagePreview" >
+                  <img mat-card-image [src]="imagePreview">
+              </div>
+                  <ngx-mat-file-input  formControlName="picture" (change)="OnFileselect($event)"></ngx-mat-file-input> 
+              
+                </mat-form-field>
+            </div>
+                <button mat-button class="mmbtn" type="submit">Submit</button>
+            </form>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+          <button mat-menu-item class="mmbtnlogout" (click)="OnLogout()">
+             Logout</button>
+        </mat-menu>
+       
+      </mat-toolbar-row>
+    </mat-toolbar>
+      <mat-sidenav-container>
+           <mat-sidenav #sidenav>
+          <mat-nav-list (click)="sidenav.close()">
+      
+            <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}"  routerLink='/entry'>MyEntries</a>
+        
+              <a mat-list-item *ngIf="admin_trigger && isAuthenticated" [routerLinkActiveOptions]="{exact:
+                true}" routerLinkActive="active" routerLink='/entry/all'>AllEntries</a>
+                <a mat-list-item *ngIf="admin_trigger && isAuthenticated" [routerLinkActiveOptions]="{exact:
+                  true}" routerLinkActive="active" routerLink='/user-management'> User Management </a>
+                
+          </mat-nav-list>
+        </mat-sidenav>
+        
+               <router-outlet></router-outlet>
+           
+      </mat-sidenav-container>
+    </div>
