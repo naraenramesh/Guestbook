@@ -36,7 +36,7 @@ export class BeginComponent implements OnInit {
         {
         this.uname=user.username
        
-        this.profile_picture=environment.S3_URL +'images/ProfilePictures/user_avatar.jfif'
+        this.profile_picture=environment.S3_URL +'images/profilePictures/user_avatar.jfif'
        if(user.profile_picture)
        {
         this.profile_picture=environment.S3_URL+ user.profile_picture.toString().replace(/\\/g, "\/")

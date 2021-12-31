@@ -108,7 +108,6 @@ const expiration_Time =
 
 this.expiration_trigger=setTimeout(()=>{
   return this.store.dispatch(Useractions.logout())},expiration_Time);
-
     return Useractions.loginlocal({user:user})
 
   }
@@ -116,7 +115,7 @@ this.expiration_trigger=setTimeout(()=>{
     {dispatch:false}
   }
 }),tap(()=>{
-  this.rs.navigate(['../../entry'],{relativeTo:this.ru})
+  this.rs.navigate(['../../entry'])
 })
 
 )

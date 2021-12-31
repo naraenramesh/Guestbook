@@ -108,7 +108,7 @@ this.all_trigger=false;
    onPageChanged() {
     if(this.all_trigger)
     {
-
+console.log('df')
       this.store.dispatch(EntryActions.fetchAllEntries({pageNumber:this.paginator.pageIndex+1}))
      
     }

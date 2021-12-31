@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BACKEND_URL:"http://localhost:8080/",
-  S3_URL:"http://localhost:8080/"
+  S3_URL:"https://guestentrybook.s3.us-west-1.amazonaws.com/"
 };
 
 

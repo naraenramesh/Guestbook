@@ -60,6 +60,7 @@ RefreshEntries()
 {
   if(this.router.url.split('/')[2] === 'all')
 {
+  console.log('fd')
    this.store.dispatch(EntryActions.fetchAllEntries({pageNumber:1})) 
   this.all_trigger=true
 }
