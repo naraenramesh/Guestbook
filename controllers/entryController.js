@@ -96,7 +96,6 @@ exports.getAllEntries=async(req,res,next)=>{
     }
 
 exports.createEntry=async(req,res,next)=>{
-//Entry.deleteOne({title:'sd'}).then(()=>console.log("Deleted"))
     default_approval=false;
   
 try{
@@ -104,10 +103,10 @@ try{
 
     expressErrorCheck(req);
    
-    if(req.file)
+    if(req.filepath)
 {  
      entry= new Entry({title:req.body.title,description:req.body.description
-        ,approved:default_approval,creator:req.query.userId,picture:req.file.path})
+        ,approved:default_approval,creator:req.query.userId,picture:req.filepath})
 }
 else{
      entry= new Entry({title:req.body.title,description:req.body.description
@@ -120,7 +119,7 @@ const result= await entry.save();
 const entry_out= await Entry.findOne({title:req.body.title}).populate('creator')
 
 if(!result.errors)
-{console.log(entry_out)
+{
         res.status(200).json({message:"Entry created",entry:entry_out})
 
 }
@@ -128,9 +127,9 @@ if(!result.errors)
 catch(err)
 {
   
-    if(req.file)
+    if(req.filepath)
     {
-    clearImage(req.file.path)
+    clearImage(req.filepath)
     }
     next(err)
 }
@@ -149,19 +148,19 @@ exports.updateEntry=async(req,res,next)=>{
        entry.description=req.body.description;
      
        
-        if(req.file)
+        if(req.filepath)
         {
       
          backup_picture=entry.picture
       
-            entry.picture= req.file.path;
+            entry.picture= req.filepath;
     
         }
        const result=await entry.save();
     
     if(!result.errors)
     {
-        if(req.file)
+        if(backup_picture)
         {    
         clearImage(backup_picture);
         }
@@ -172,9 +171,9 @@ exports.updateEntry=async(req,res,next)=>{
         }
     catch(err)
     {
-        if(req.file)
+        if(req.filepath)
         {
-    clearImage(req.file.path)
+    clearImage(req.filepath)
         }
         next(err)
     }
@@ -201,26 +200,14 @@ exports.deleteEntry=async(req,res,next)=>{
     
     if(!result.errors)
     {
-        entry.picture="images/entryPictures/2021071244503-Koala.jpg"
-        //clearImage(entry.picture);
-        const params={
-            Bucket:'guestentrybook',
-            Key:entry.picture
-        }
-        s3.deleteObject(params, (error,data)=>{
-            if(error)
-            {
-                res.status(500).send(error)
-            }
-           // res.status(200).send("s3 gone")
-           if(data)
-           {console.log(data)
-           res.status(200).json({message:"Entry deleted" ,entryId:req.body.entryId})
+        if(entry.picture)
+           {
+        clearImage(entry.picture) 
            }
-        })
+}
+        res.status(200).json({message:"Entry deleted" ,entryId:req.body.entryId})
 
-            
-    }
+    
         }
     catch(err)
     {
@@ -257,11 +244,6 @@ module.exports.approveEntry=async(req,res,next)=>{
     }
 }
 
-const clearImage = filePath => {
-    filePath = path.join(__dirname, '..', filePath);
-    fs.unlink(filePath, err => {console.log(err)});
-  };
-
   
   const formatError=(errmsg,errcode)=>
   {
@@ -270,6 +252,18 @@ const clearImage = filePath => {
     throw error;
   }
 
+  const clearImage=(picture)=>{
+    const params={
+        Bucket:'guestentrybook',
+        Key:picture
+    }
+    s3.deleteObject(params, (error,data)=>{
+        if(error)
+        {
+            formatError(error,500)
+        }
+    })  
+  }
 
   const expressErrorCheck=(req)=>{
     const errors = validationResult(req);

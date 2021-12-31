@@ -6,6 +6,21 @@ const path=require('path');
 const fs=require('fs');
 const {validationResult} = require('express-validator/check')
 const crypto=require('crypto');
+const aws = require('aws-sdk');
+
+  aws.config.update({
+
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+
+    region: process.env.AWS_REGION
+
+  });
+
+  
+
+  const s3 = new aws.S3();
 
 
 
@@ -72,9 +87,9 @@ try{
 const hash =await bcrypt.hash(password,10)
 let user=''
 
-if(req.file)
+if(req.filepath)
 {  
- user= new User({username:username,password:hash,email:email,privilege:defaultPrivileage,profile_picture:req.file.path})
+ user= new User({username:username,password:hash,email:email,privilege:defaultPrivileage,profile_picture:req.filepath})
 }
 else{
      user= new User({username:username,password:hash,email:email,privilege:defaultPrivileage})
@@ -89,9 +104,9 @@ if(!result.errors){
 }
 catch(err)
 {
-    if(req.file)
+    if(req.filepath)
     {
-    clearImage(req.file.path)
+    clearImage(req.filepath)
     }
 next(err);
 }
@@ -148,7 +163,7 @@ exports.changeProfilePicture=async(req,res,next)=>{
     try{
         expressErrorCheck(req);
         
-        if(!req.file)
+        if(!req.filepath)
 {
 formatError('Input file is missing',404);
 }
@@ -156,13 +171,15 @@ const user= await User.findById(req.query.userId);
         
 
     const backup_picture=user.profile_picture;
-user.profile_picture=req.file.path
+user.profile_picture=req.filepath
               const result=await user.save();
 
         if(!result.errors)
         {
+            if(backup_picture)
+            {
            clearImage(backup_picture);
-
+            }
             res.status(201).json({message:"User Profile Picture updated successfully",imagePath:user.profile_picture});
         }
     
@@ -185,11 +202,9 @@ exports.changePassword=async (req,res,next)=>{
         const result = await User.findByIdAndUpdate(req.query.userId,{password:hash},
             function (err, docs) {
 if (err){
-console.log(err)
+formatError(err,500)
 }
-else{
-console.log("Updated User : ", docs);
-}
+
 })
 
         if(!result.errors)
@@ -258,10 +273,18 @@ exports.getUsers=async(req,res,next)=>{
 
 }
 
-const clearImage = filePath => {
-    filePath = path.join(__dirname, '..', filePath);
-    fs.unlink(filePath, err => {console.log(err)});
-  };
+const clearImage=(picture)=>{
+    const params={
+        Bucket:'guestentrybook',
+        Key:picture
+    }
+    s3.deleteObject(params, (error,data)=>{
+        if(error)
+        {
+            formatError(error,500)
+        }
+    })  
+  }
 
 
   const formatError=(errmsg,errcode)=>

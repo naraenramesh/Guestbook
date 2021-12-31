@@ -1,6 +1,3 @@
-
- 
-
 const multer=require('multer');
 
 const dateFormat=require('dateformat')    
@@ -117,7 +114,7 @@ const fileFilter = (req, file, cb) => {
 
           }
 
-          console.log(key)
+          req.filepath=key
 
           cb(null, key);
 
@@ -127,22 +124,12 @@ const fileFilter = (req, file, cb) => {
 
   });
 
-  
-
-
-
-
-console.log(upload)
 
  
 
   const multer_action= upload.single("picture")
 
  
-
-  
-
-  console.log(multer_action)
 
  
 

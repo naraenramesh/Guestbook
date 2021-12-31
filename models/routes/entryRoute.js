@@ -1,5 +1,5 @@
 const express=require('express')
-const EntryCtl=require('../../controllers/EntryController');
+const EntryCtl=require('../../controllers/entryController');
 const router=express.Router();
 const error_handler=require("../../middleware/error_handler");
 const auth_validate=require("../../middleware/auth_validate");

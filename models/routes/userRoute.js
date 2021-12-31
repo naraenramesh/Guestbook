@@ -2,7 +2,6 @@ const express=require('express')
 const userCtl=require('../../controllers/userController');
 const router=express.Router();
 const error_handler=require("../../middleware/error_handler");
-
 const Picture_upload=require("../../middleware/multer");
 const auth_validate=require("../../middleware/auth_validate");
 const userValidator=require("../../controllers/validators/uservalidator")
