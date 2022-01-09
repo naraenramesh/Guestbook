@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({extended:false}))
   app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use("/",express.static(path.join(__dirname,"angular")));
-User.deleteMany({username:'naraen'}).then(rs=>console.log('success'))
 app.use(express.static('public'));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,8 +41,7 @@ mongoose.connect("mongodb+srv://guestbook:4ePDASE8TwWFDm3M@guestbook.nxb5s.mongo
 {useNewUrlParser: true, useUnifiedTopology : true})
 .then(()=>{
     console.log("Connected to Database");
-    app.listen(config.get('port'))
-
+   app.listen(config.get('port'))
 console.log("Running in " + config.get('env') + " mode at port " +config.get('port'));
 }).catch((err)=>
 {console.log(err)}
