@@ -8,7 +8,7 @@ const UserRouter=require('./models/routes/userRoute');
 const EntryRouter=require('./models/routes/entryRoute');
 
 const config=require('./config/covict_config')
-
+console.log('gf')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
 
