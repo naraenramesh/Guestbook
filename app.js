@@ -4,11 +4,8 @@ const mongoose=require('mongoose');
 const bodyParser= require('body-parser');
 const path=require('path');
 const app=express();
-const User=require('./models/schemas/user');
-const Entry=require('./models/schemas/entry');
 const UserRouter=require('./models/routes/userRoute');
 const EntryRouter=require('./models/routes/entryRoute');
-const dateFormat = require('dateformat');
 
 const config=require('./config/covict_config')
 
