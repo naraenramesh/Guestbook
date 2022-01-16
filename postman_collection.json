@@ -1,0 +1,773 @@
+{
+	"info": {
+		"_postman_id": "4caed82b-f4d7-4496-b53f-7aad841139be",
+		"name": "AI-Track Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login_check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    try {\r",
+									"        pm.response.to.have.status(200);\r",
+									"pm.collectionVariables.set(\"Authorization\", pm.response.json().user.token);\r",
+									"pm.collectionVariables.set(\"userId\", pm.response.json().user._id)\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"Adminuser@admin.com\",\"password\":\"Adminuser\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup_check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"Admin\",\"email\":\"Adminuser@admin.com\",\"password\":\"Adminuser\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/signup/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(201);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        if(!pm.response.to.have.status(201))\r",
+									"        {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"        }\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyMTU4MiwiZXhwIjoxNjQwMDI1MTgyfQ.zlYwdKIor_1vZuUmWhGfx6vNcllwQfpSD35PT5nWQT0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"Adminuser@admin.com\",\"password\":\"Adminuser\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/changePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"changePassword"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePrivilege",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(201);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyMTU4MiwiZXhwIjoxNjQwMDI1MTgyfQ.zlYwdKIor_1vZuUmWhGfx6vNcllwQfpSD35PT5nWQT0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"Adminuser@admin.com\",\"privilege\":\"Admin\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/changePrivilege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"changePrivilege"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/getUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"getUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Charts",
+			"item": [
+				{
+					"name": "getCharts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyMTU4MiwiZXhwIjoxNjQwMDI1MTgyfQ.zlYwdKIor_1vZuUmWhGfx6vNcllwQfpSD35PT5nWQT0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"app\":\"EBM\",\"endDate\": \"2021-12-18T00:00:00.000Z\",\r\n\"startDate\": \"2021-12-14T00:00:00.000Z\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/charts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"charts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "createTask",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyOTU3NywiZXhwIjoxNjQwMDMzMTc3fQ.KUrlWw7m4vaTuuQzCpuleQLmab92GRflqK4Xe0P-LlE",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": {\r\n        \"app\": \"EBM\",\r\n        \"activity\": \"Monitoring\",\r\n        \"task_name\": \"check_postman\",\r\n        \"status\": \"In Progress\",\r\n        \"sub_status\": \"Connectivity Setup\",\r\n        \"taskId\": \"\",\r\n        \"tool_used\": \"Jenkins\",\r\n        \"efforts_saved\": \"12\",\r\n        \"opened_date\": \"2021-12-20T18:07:28.036Z\",\r\n        \"closed_date\": null\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/createTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createTask"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTask",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyOTU3NywiZXhwIjoxNjQwMDMzMTc3fQ.KUrlWw7m4vaTuuQzCpuleQLmab92GRflqK4Xe0P-LlE",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\"task\":{\"taskId\":\"AI10000474\"}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/deleteTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteTask"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.request.addQueryParams(\"userid\")\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var date = new Date();\r",
+									"var tStamp = date.getTime();\r",
+									"pm.request.headers.upsert({\r",
+									"    key: \"time_stamp\",\r",
+									"    value: tStamp\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyMTU4MiwiZXhwIjoxNjQwMDI1MTgyfQ.zlYwdKIor_1vZuUmWhGfx6vNcllwQfpSD35PT5nWQT0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"app\":\"ESPI\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tasks?=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditTask",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcml2aWxlZ2UiOiJBZG1pbiIsInVzZXJJZCI6IjYxYmUxOGYyZTVkNDA0NmI0NDk4OTczNiIsImlhdCI6MTY0MDAyOTU3NywiZXhwIjoxNjQwMDMzMTc3fQ.KUrlWw7m4vaTuuQzCpuleQLmab92GRflqK4Xe0P-LlE",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\"task\":{\r\n    \"app\":\"EBM\",\"activity\":\"Monitoring\",\"task_name\":\"check\",\"status\":\"In Progress\",\"sub_status\":\"Connectivity Setup\",\"taskId\":\"AI10000460\",\"tool_used\":\"Jenkins\",\"efforts_saved\":\"12\",\"opened_date\":\"2021-12-20T18:07:28.036Z\",\"closed_date\":null}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/editTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editTask"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apps",
+			"item": [
+				{
+					"name": "getApps",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/apps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"apps"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appProgress",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\r",
+									"\r",
+									"\r",
+									"    try {\r",
+									"\r",
+									"        pm.response.to.have.status(200);\r",
+									"\r",
+									"    } catch (e) {\r",
+									"        throw Error(pm.response.json().message)\r",
+									"\r",
+									"    }\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/appProgress",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appProgress"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "61be18f2e5d4046b44989736",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.addHeader({key:'Authorization',value:pm.collectionVariables.get('Authorization')})",
+					"",
+					"pm.request.addQueryParams('userId='+ pm.collectionVariables.get('userId'))"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}

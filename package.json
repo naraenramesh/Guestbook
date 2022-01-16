@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start-server": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "newman":"newman"
   },
   "dependencies": {
     "aws-sdk": "^2.943.0",
