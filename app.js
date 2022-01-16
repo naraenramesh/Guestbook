@@ -36,7 +36,8 @@ mongoose.connect("mongodb+srv://guestbook:4ePDASE8TwWFDm3M@guestbook.nxb5s.mongo
 {useNewUrlParser: true, useUnifiedTopology : true})
 .then(()=>{
     console.log("Connected to Database");
-   app.listen(config.get('port'))
+   //app.listen(config.get('port'))
+   app.listen(3000)
 console.log("Running in " + config.get('env') + " mode at port " +config.get('port'));
 }).catch((err)=>
 {console.log(err)}
