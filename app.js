@@ -26,7 +26,7 @@ app.use((req, res, next) => {
     next();
   });
 
-
+console.log('check')
 app.use("/api",UserRouter);
 app.use("/api",EntryRouter);
 app.use((req,res,next)=>{
